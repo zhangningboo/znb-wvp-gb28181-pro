@@ -22,32 +22,23 @@ spring:
       # [可选] 数据库 DB
       database: 7
       # [可选] 访问密码,若你的redis服务器没有设置密码，就不需要用密码去连接
-      password: luna
+      password: 
       # [可选] 超时时间
       timeout: 10000
   # mysql数据源
+  # datasource:
+  #   type: com.zaxxer.hikari.HikariDataSource
+  #   driver-class-name: com.mysql.cj.jdbc.Driver
+  #   url: jdbc:mysql://127.0.0.1:3306/wvp273数据库统合?useUnicode=true&characterEncoding=UTF8&rewriteBatchedStatements=true&serverTimezone=PRC&useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true
+  #   username: root
+  #   password: 12345678
+  # postgres数据源
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/wvp273数据库统合?useUnicode=true&characterEncoding=UTF8&rewriteBatchedStatements=true&serverTimezone=PRC&useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true
-    username: root
-    password: 12345678
-  # h2数据库
-  #  datasource:
-  #    driver-class-name: org.h2.Driver
-  #    url: jdbc:h2:mem:wvp
-  #    username: sa
-  #    password: 12345678
-  #    sql:
-  #      init:
-  #        # 启动时仅初始化内置的数据库，例如h2:mem
-  #        mode: embedded
-  #        schema-locations: file:数据库/2.7.4-h2/h2-schema.sql
-  #        data-locations: file:数据库/2.7.4-h2/h2-data.sql
-  #  # h2数据库控制台，请注意仅在测试环境下使用！
-  #  h2:
-  #    console:
-  #      enabled: true
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/wvp
+    username: postgres
+    password: password
 #[可选] WVP监听的HTTP端口, 网页和接口调用都是这个端口
 server:
   port: 18080
@@ -80,17 +71,18 @@ sip:
 
 #zlm 默认服务器配置
 media:
-  id: zlmediakit-local
+  id: 7l5wAOdHwxlwq8rd
   # [必须修改] zlm服务器的内网IP
-  ip: 192.168.1.10
+  ip: 192.168.222.170
   # [必须修改] zlm服务器的http.port
   http-port: 9092
   # [必选选] zlm服务器的hook.admin_params=secret
-  secret: TWSYFgYJOQWB4ftgeYut8DW4wbs7pQnj
+  secret: OUT7iFRbIZDeUYRCzF8SXS4qjuVRsbfH
   # 启用多端口模式, 多端口模式使用端口区分每路流，兼容性更好。 单端口使用流的ssrc区分， 点播超时建议使用多端口测试
   rtp:
     # [可选] 是否启用多端口模式, 开启后会在portRange范围内选择端口用于媒体流传输
     enable: true
+    port: 10011
     # [可选] 在此范围内选择端口用于媒体流传输, 必须提前在zlm上配置该属性，不然自动配置此属性可能不成功
     port-range: 40000,45000 # 端口范围
     # [可选] 国标级联在此范围内选择端口发送媒体流,
